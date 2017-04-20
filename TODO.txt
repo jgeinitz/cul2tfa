@@ -1,0 +1,5 @@
+
+
+Apr 20th 2017:
+- try to get a clue on the last bytes
+- implement the crc check (it's only a mockup at the moment)
