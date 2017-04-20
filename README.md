@@ -7,8 +7,8 @@ A received packet looks like this (at least on my device):
 	N029385566A32EACFA72A48800A
 
 On http://fredboboss.free.fr/articles/tx29.php is an excelent
-information on the 1st 5 bytes (pr 10 nibbles) of the packet - thus
-we know
+information on the 1st 5 bytes (or 10 nibbles) of the packet.
+This results in:
 
 	N029385566A32EACFA72A48800A
 	!!!!--------!!------------!
@@ -33,4 +33,4 @@ With that info decoding results in:
 The last line is suitable for some other tools like cacti or
 nagios to postprocess the info.
 
-Juergen
+Juergen Apr 2017
