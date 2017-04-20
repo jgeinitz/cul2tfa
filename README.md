@@ -22,13 +22,13 @@ At the moment I have no idea about the last 7 bytes.
 
 With that info decoding results in:
 
-        SensorID:    14
-        New battery: no
-        low battery: no
-        Temp:        15.6
-        humidity:    NaN
+	       SensorID:    14
+	       New battery: no
+	       low battery: no
+	       Temp:        15.6
+	       humidity:    NaN
 
-        sensorid:14 newbat:0 lowbat:0 temp:15.6 humidity:-1
+	       sensorid:14 newbat:0 lowbat:0 temp:15.6 humidity:-1
 
 The last line is suitable for some other tools like cacti or
 nagios to postprocess the info.
