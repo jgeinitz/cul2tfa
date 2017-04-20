@@ -11,12 +11,12 @@ information on the 1st 5 bytes (pr 10 nibbles) of the packet - thus
 we know
 
 	N029385566A32EACFA72A48800A
-        !!!!--------!!------------!
-        !!!     +           +--------- unknown to me
-        !!!     +
-        !!!     +--------------------- decoded using the info from fred
-        !!!
-        !!+--------------------------- ID-info from CUL
+	!!!!--------!!------------!
+	!!!     +           +--------- unknown to me
+	!!!     +
+	!!!     +--------------------- decoded using the info from fred
+	!!!
+	!!+--------------------------- ID-info from CUL
 
 At the moment I have no idea about the last 7 bytes.
 
