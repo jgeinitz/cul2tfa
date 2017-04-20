@@ -3,7 +3,7 @@
 import time
 import serial
 
-verbose = 0
+verbose = 1
 
 temperature = 0.0
 
@@ -88,14 +88,13 @@ if ser.isOpen():
     ser.write('X0\r\nX21\r\nNr2\r\nV\r\n')
 
 
-    if verbose: print 'Enter your commands below.\nInsert "exit" to leave the application.\n'
-
     running=1
     input=1
     while running == 1 :
 
         while ser.inWaiting() > 0:
             out = ser.readline()
+            if verbose : print out
             if out != '':
                 if culparse(out.rstrip('\n').rstrip('\r')):
                     if checkcrc(out.rstrip('\n').rstrip('\r')):
@@ -108,4 +107,6 @@ if ser.isOpen():
 else:
     running=0
 reportvaluesLine()
+if verbose : print "turning off receiver"
+ser.write("Nx\r\nX00\r\n")
 ser.close()
