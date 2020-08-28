@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import sys
 import glob
@@ -14,7 +14,7 @@ temperature = 0
 new_battery = 0
 lowbat      = 0
 
-class DenicWeather:
+class TfaWeather:
     global      ser
     verbose     = 0
     quiet       = 0
@@ -55,7 +55,7 @@ class DenicWeather:
         if flux == 0:
             x='sensorid:'+str(sid)+' newbat:'+str(new_battery)+ ' lowbat:'+str(lowbat)+' temp:'+str(temperature) + ' humidity:'+h + ' '
         else:
-            x='denicwetter,id='+str(sid)+' sensorid='+str(sid)+',temp='+str(temperature)
+            x='tfaweather,id='+str(sid)+' sensorid='+str(sid)+',temp='+str(temperature)
         if temperature != 0 and self.verbose:
             print("report values line " + x)
         #sys.stdout.write( x )
@@ -63,12 +63,12 @@ class DenicWeather:
 
     def reportvaluesCCU(self,flux=0):
         try:
-            fil = open("/disk/tmp/DENICt.txt","a+")
+            fil = open("/tmp/TFAt.txt","a+")
             if flux == 0:
                 fil.write(str(temperature))
             else:
                 ts = int(time.time())
-                fil.write('denicwetter,id='+str(sid)+' sensorid='+str(sid)+',temp='+str(temperature) + " " +str(ts) + '000000000')
+                fil.write('tfaweather,id='+str(sid)+' sensorid='+str(sid)+',temp='+str(temperature) + " " +str(ts) + '000000000')
             fil.write("\n")
             fil.close()
         except:
@@ -76,7 +76,7 @@ class DenicWeather:
 
     def reportvaluesCCU_influx(self):
                 ts = int(time.time())
-                data = 'denicwetter_longrun,host=datamaster,id='+str(sid)+' sensorid='+str(sid)+',temp='+str(temperature) + ",new_battery=" + str(new_battery) + " " +str(ts) + '000000000'
+                data = 'tfaweather_longrun,host=datamaster,id='+str(sid)+' sensorid='+str(sid)+',temp='+str(temperature) + ",new_battery=" + str(new_battery) + " " +str(ts) + '000000000'
                 if self.verbose:
                     print(data)
                 response = requests.post('http://192.168.20.49:9999/write?db=telegraf',data=data)
@@ -135,7 +135,7 @@ class DenicWeather:
         self.quiet=q
 
         if self.verbose:
-            print ('Interface between DENIC Weather Station and influxdb')
+            print ('Interface between TFA Weather Station and influxdb')
             print ('Opening CUL connection')
 
         p = '/disk/tmp/' + os.path.basename(myname)  + '.pid'
@@ -291,7 +291,7 @@ def __main__():
                 else:
                     print("usage: "+ i_am + ' [--verbose|-v|--flux|--curl]')
                 
-    x = DenicWeather(i_am,v,q)
+    x = TfaWeather(i_am,v,q)
     while 1 == 1:
         x.readloop(outputformat)
         if v:
